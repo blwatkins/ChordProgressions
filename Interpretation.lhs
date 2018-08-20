@@ -1,3 +1,6 @@
+-- Chord Sequence Generator
+-- Interpretation Module
+-- Interprets triad symbols (see ChordTypes.lhs) into music
 
 > module Interpretation (interpTriadList) where
 > import System.Random

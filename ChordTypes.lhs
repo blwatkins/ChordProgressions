@@ -1,3 +1,5 @@
+-- Chord Sequence Generator
+-- ChordTypes Module
 
 > module ChordTypes where
 

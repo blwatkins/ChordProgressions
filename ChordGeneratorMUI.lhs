@@ -1,3 +1,6 @@
+-- Chord Sequence Generator
+-- MUI Program Module
+-- Musical User Interface (MUI) takes input from the program to generate chord sequences
 
 > {-# LANGUAGE Arrows #-}
 > module Main where

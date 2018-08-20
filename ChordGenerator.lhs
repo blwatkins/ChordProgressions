@@ -1,8 +1,6 @@
--- Brittni Watkins
--- CRCP 2340
--- 1 May 2017
--- Final Project
 -- Chord Sequence Generator
+-- ChordGenerator Module
+-- Rule type, cadence rules, triad rules, and triad generation
 
 > module ChordGenerator where
 > import System.Random

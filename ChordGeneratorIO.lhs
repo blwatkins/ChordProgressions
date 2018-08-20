@@ -1,3 +1,6 @@
+-- Chord Sequence Generator
+-- Command Line IO program Module
+-- Takes input from the command line to generate chord sequences
 
 > module Main where
 > import System.Random
