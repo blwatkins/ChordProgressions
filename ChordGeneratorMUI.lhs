@@ -79,7 +79,10 @@
 >     let randomSeed = stringToInt randomSeedStr
 >     returnA -< (random, randomSeed)
 
-> transpositionPanel :: UISF () (PitchClass, Int)
+> pitchClassList :: [PitchClass]
+> pitchClassList = [C, Cs, D, Ds, E, F, Fs, G, Gs, A, As, B]
+
+> transpositionPanel :: UISF () (Int, Int)
 > transpositionPanel = undefined
 
 > interpMusic :: [[Triad]] -> Bool -> Int -> Music Pitch
