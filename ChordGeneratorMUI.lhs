@@ -82,11 +82,19 @@
 > pitchClassList :: [String]
 > pitchClassList = ["C", "Cs", "D", "Ds", "E", "F", "Fs", "G", "Gs", "A", "As", "B"]
 
-> transpositionPanel :: UISF () Int
-> transpositionPanel = proc pitchList -> do
+> octavePanel :: UISF () Int
+> octavePanel = proc _ -> do
+>     octave <- hiSlider 1 (0, 7) 4 -< ()
+>     display -< octave
+>     returnA -< octave  
+
+> transpositionPanel :: UISF () (Int, Int)
+> transpositionPanel = proc _ -> do
 >     label "Key: " -< ()
 >     pitchClassIndex <- leftRight $ radio pitchClassList 0 -< ()
->     returnA -< pitchClassIndex
+>     label "Octave: " -< ()
+>     octave <- leftRight $ octavePanel -< ()
+>     returnA -< (pitchClassIndex, octave)
 
 > interpMusic :: [[Triad]] -> Bool -> Int -> Music Pitch
 > interpMusic triads random randomSeed =
@@ -105,7 +113,7 @@
 >     (cadenceTriads) <- title "Cadence Triad Generation" $ cadenceTriadsPanel -< cadences
 >     (triads) <- title "Triad Generation" $ triadGenerationPanel -< cadenceTriads
 >     (random, randomSeed) <- title "Randomness" $ leftRight $ randomnessPanel -< ()
->     (pitchClassIndex) <- title "Transposition" $ transpositionPanel -< ()
+>     (pitchClassIndex, octave) <- title "Transposition" $ transpositionPanel -< ()
 >     let music = interpMusic triads random randomSeed
 >     label "Filename: " -< ()
 >     filename <- textbox "" -< Nothing
