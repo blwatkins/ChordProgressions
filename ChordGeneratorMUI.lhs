@@ -79,6 +79,9 @@
 >     let randomSeed = stringToInt randomSeedStr
 >     returnA -< (random, randomSeed)
 
+> transpositionPanel :: UISF () (PitchClass, Int)
+> transpositionPanel = undefined
+
 > interpMusic :: [[Triad]] -> Bool -> Int -> Music Pitch
 > interpMusic triads random randomSeed =
 >     if random then RandomInterpretation.interpTriadList triads (mkStdGen randomSeed)
