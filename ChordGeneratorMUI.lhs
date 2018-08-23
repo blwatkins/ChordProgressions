@@ -84,7 +84,7 @@
 
 > octavePanel :: UISF () Int
 > octavePanel = proc _ -> do
->     octave <- hiSlider 1 (0, 7) 4 -< ()
+>     octave <- hiSlider 1 (1, 7) 4 -< ()
 >     display -< octave
 >     returnA -< octave  
 
@@ -101,6 +101,11 @@
 >     if random then RandomInterpretation.interpTriadList triads (mkStdGen randomSeed)
 >     else Interpretation.interpTriadList triads
 
+> transposeMusic :: MusicPitch -> Int -> Int -> Music Pitch
+> transposeMusic music pitchClassIndex octave =
+>     let transposeValue = pitchClassIndex + ((octave - 4) * 12)
+>     in transpose transposeValue music
+
 > outputMIDIFile :: UISF (SEvent (FilePath, Music Pitch)) ()
 > outputMIDIFile = ioWidget1 output where
 >     output (filePath, music) = do
@@ -115,12 +120,13 @@
 >     (random, randomSeed) <- title "Randomness" $ leftRight $ randomnessPanel -< ()
 >     (pitchClassIndex, octave) <- title "Transposition" $ transpositionPanel -< ()
 >     let music = interpMusic triads random randomSeed
+>         musicTransposed = transposeMusic music pitchClassIndex octave
 >     label "Filename: " -< ()
 >     filename <- textbox "" -< Nothing
 >     output <- edge <<< button "Output to Midi" -< ()
->     outputMIDIFile -< fmap (const (filename, music)) output
+>     outputMIDIFile -< fmap (const (filename, musicTransposed)) output
 >     play <- edge <<< button "Play" -< ()
->     let messages = musicToMsgs' defParams music
+>     let messages = musicToMsgs' defParams musicTransposed
 >         bufferOp = if play == Nothing then NoBOp else AppendToBuffer messages
 >     midiOutB -< (devId, bufferOp)
 >     returnA -< ()
