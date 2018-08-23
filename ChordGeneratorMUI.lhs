@@ -101,7 +101,7 @@
 >     if random then RandomInterpretation.interpTriadList triads (mkStdGen randomSeed)
 >     else Interpretation.interpTriadList triads
 
-> transposeMusic :: MusicPitch -> Int -> Int -> Music Pitch
+> transposeMusic :: Music Pitch -> Int -> Int -> Music Pitch
 > transposeMusic music pitchClassIndex octave =
 >     let transposeValue = pitchClassIndex + ((octave - 4) * 12)
 >     in transpose transposeValue music
