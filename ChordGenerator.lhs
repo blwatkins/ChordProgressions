@@ -60,26 +60,22 @@
 
 > triadRules :: [Rule (Triad, [Triad])]
 > triadRules = [
->     (0.95, (I, [I, V])),
->     (0.05, (I, [I, VII])),
->     (0.40, (II, [II, VI])),
->     (0.40, (II, [II, V])),
->     (0.10, (II, [II, VII])),
->     (0.10, (II, [II, I])),
->     (0.90, (III, [III, I])),
->     (0.10, (III, [III, VII])),
->     (0.40, (IV, [IV, VI])),
->     (0.40, (IV, [IV, V])),
->     (0.10, (IV, [IV, VII])),
->     (0.10, (IV, [IV, I])),
->     (0.45, (V, [V, II])),
->     (0.45, (V, [V, IV])),
+>     (0.90, (I, [I, V])),
+>     (0.10, (I, [I, VII])),
+>     (0.70, (II, [II, VI])),
+>     (0.30, (II, [II, I])),
+>     (0.80, (III, [III, I])),
+>     (0.20, (III, [III, VII])),
+>     (0.70, (IV, [IV, VI])),
+>     (0.30, (IV, [IV, I])),
+>     (0.50, (V, [V, II])),
+>     (0.40, (V, [V, IV])),
 >     (0.10, (V, [V, I])),
 >     (0.50, (VI, [VI, III])),
 >     (0.50, (VI, [VI, I])),
 >     (0.30, (VII, [VII, II])),
->     (0.30, (VII, [VII, IV])),
->     (0.30, (VII, [VII, I])) ]
+>     (0.50, (VII, [VII, IV])),
+>     (0.20, (VII, [VII, I])) ]
 
 > genPhraseTriads :: [[Triad]] -> [Rule (Triad, [Triad])] -> StdGen -> Int -> [[Triad]]
 > genPhraseTriads [] _ _ _ = []
