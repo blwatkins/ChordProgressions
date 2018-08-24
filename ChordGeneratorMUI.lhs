@@ -84,7 +84,7 @@
 
 > octavePanel :: UISF () Int
 > octavePanel = proc _ -> do
->     octave <- hiSlider 1 (1, 7) 4 -< ()
+>     octave <- hiSlider 1 (1, 6) 4 -< ()
 >     display -< octave
 >     returnA -< octave  
 
