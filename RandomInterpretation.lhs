@@ -1,3 +1,7 @@
+-- Chord Sequence Generator
+-- RandomInterpretation Module
+-- Interprets triad symbols (see ChordTypes.lhs) into music
+-- Allows triads to be interpreted with a random quarter note or eigth note duration
 
 > module RandomInterpretation (interpTriadList) where
 > import System.Random

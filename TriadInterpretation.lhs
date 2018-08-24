@@ -1,3 +1,7 @@
+-- Chord Sequence Generator
+-- TriadInterpretation Module
+-- Interprets triad symbols (see ChordTypes.lhs) as a triad of absolute pitches
+-- Pitches are transposed later in the interpretation process
 
 > module TriadInterpretation (chordPitches) where
 > import ChordTypes
