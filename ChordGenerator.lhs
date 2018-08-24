@@ -1,10 +1,10 @@
 -- Chord Sequence Generator
 -- ChordGenerator Module
--- , cadence rules, triad rules, and triad generation
+-- Cadence rules, cadence generation, and triad generation
 
 > module ChordGenerator where
 > import System.Random
-> import Probability
+> import Rule
 > import ChordTypes
 > import TriadRules
 

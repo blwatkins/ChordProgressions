@@ -4,14 +4,8 @@
 -- Major and minor modes
 
 > module TriadRules where
-> import Probability
 > import ChordTypes
-
-=====================================================================
-
-> type Rule a = (Prob, a)
-
-=====================================================================
+> import Rule
 
 -- Triad Rules for Major Keys
 
