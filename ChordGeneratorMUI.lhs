@@ -11,6 +11,7 @@
 > import FRP.UISF
 > import IOWidgets
 > import ChordTypes
+> import TriadRules
 > import ChordGenerator
 > import RandomInterpretation
 > import Interpretation
