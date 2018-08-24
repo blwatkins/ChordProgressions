@@ -5,6 +5,7 @@
 > module ChordGenerator where
 > import System.Random
 > import Rule
+> import Probability
 > import ChordTypes
 > import TriadRules
 
