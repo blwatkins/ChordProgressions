@@ -7,9 +7,12 @@
 > import ChordTypes
 > import Euterpea
 
-> chordPitches :: Triad -> [AbsPitch]
-> chordPitches t = 
->     let rule = filter (\(tn, ps) -> t == tn) majorInv
+> chordPitches :: Triad -> Bool -> [AbsPitch]
+> chordPitches t isMajor = 
+>     let inversion =
+>             if isMajor then majorInv
+>             else minorInv    
+>         rule = filter (\(tn, ps) -> t == tn) majorInv
 >         pitches = snd (rule !! 0)
 >     in pitches
 
