@@ -19,17 +19,23 @@
 > cadenceTriadsShow :: [[Triad]]
 > cadenceTriadsShow = map reverse cadenceTriads
 
-> triadList :: [[Triad]]
-> triadList = genPhraseTriads cadenceTriads triadRules (mkStdGen 102) 4
+> majorTriadList :: [[Triad]]
+> majorTriadList = genPhraseTriads cadenceTriads triadRules (mkStdGen 102) 4
 
-> triads :: [[Triad]]
-> triads = map reverse triadList
+> majorTriads :: [[Triad]]
+> majorTriads = map reverse majorTriadList
 
 > majorMusic :: Music Pitch
-> majorMusic = Interpretation.interpTriadList triads True
+> majorMusic = Interpretation.interpTriadList majorTriads True
+
+> minorTriadList :: [[Triad]]
+> minorTriadList = genPhraseTriads cadenceTriads minorTriadRules (mkStdGen 102) 4
+
+> minorTriads :: [[Triad]]
+> minorTriads = map reverse minorTriadList
 
 > minorMusic :: Music Pitch
-> minorMusic = Interpretation.interpTriadList triads False
+> minorMusic = Interpretation.interpTriadList minorTriads False
 
 > writeMajor = writeMidi "major.mid" majorMusic
 > writeMinor = writeMidi "minor.mid" minorMusic
