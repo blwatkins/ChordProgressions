@@ -22,3 +22,6 @@
 >     (V, [(-1), 2, 7]),
 >     (VI, [(-3), 0, 4]),
 >     (VII, [(-1), 2, 5]) ]
+
+> minorInv :: [(Triad, [AbsPitch])]
+> minorInv = undefined
