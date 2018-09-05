@@ -30,3 +30,6 @@
 
 > minorMusic :: Music Pitch
 > minorMusic = Interpretation.interpTriadList triads False
+
+> writeMajor = writeMidi "major.mid" majorMusic
+> writeMinor = writeMidi "minor.mid" minorMusic

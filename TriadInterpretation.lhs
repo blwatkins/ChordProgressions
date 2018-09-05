@@ -11,8 +11,8 @@
 > chordPitches t isMajor = 
 >     let inversion =
 >             if isMajor then majorInv
->             else minorInv    
->         rule = filter (\(tn, ps) -> t == tn) majorInv
+>             else minorInv   
+>         rule = filter (\(tn, ps) -> t == tn) inversion
 >         pitches = snd (rule !! 0)
 >     in pitches
 
@@ -28,7 +28,7 @@
 
 > minorInv :: [(Triad, [AbsPitch])]
 > minorInv = [
->     (I,   [0, 3, 6]),
+>     (I,   [0, 3, 7]),
 >     (II,  [2, 5, 8]),
 >     (III, [(-2), 3, 7]),
 >     (IV,  [0, 5, 8]),
