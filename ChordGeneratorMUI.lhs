@@ -53,20 +53,29 @@
 >     display -< cadenceTriads
 >     returnA -< cadenceTriadsOrig
 
+> modesPanel :: UISF () (Bool)
+> modesPanel = proc _ -> do
+>     modeIndex <- leftRight $ radio ["major", "minor"] 0 -< ()
+>     let isMajor = if modeIndex == 0 then True
+>         else False
+>     returnA -< isMajor
+
 > numTriadsPanel :: UISF () (Int)
 > numTriadsPanel = proc _ -> do
 >     numTriads <- hiSlider 1 (0, 10) 0 -< ()
 >     display -< numTriads
 >     returnA -< (numTriads)
 
-> triadGenerationPanel :: UISF ([[Triad]]) ([[Triad]])
-> triadGenerationPanel = proc (cadenceTriads) -> do
+> triadGenerationPanel :: UISF ([[Triad]], Bool) ([[Triad]])
+> triadGenerationPanel = proc (cadenceTriads, isMajor) -> do
 >     label "Number of Triads: " -< ()
 >     (numTriads) <- leftRight $ numTriadsPanel -< ()
 >     label "Triad Seed: " -< ()
 >     triadGenSeedStr <- textbox "" -< Nothing
 >     let triadGenSeed = stringToInt triadGenSeedStr
->         triadList = genPhraseTriads cadenceTriads majorTriadRules (mkStdGen triadGenSeed) numTriads
+>         triadRules = if isMajor then majorTriadRules
+>             else minorTriadRules
+>         triadList = genPhraseTriads cadenceTriads triadRules (mkStdGen triadGenSeed) numTriads
 >         triads = map reverse triadList
 >     label "Triads: " -< ()
 >     display -< triads
@@ -97,10 +106,10 @@
 >     octave <- leftRight $ octavePanel -< ()
 >     returnA -< (pitchClassIndex, octave)
 
-> interpMusic :: [[Triad]] -> Bool -> Int -> Music Pitch
-> interpMusic triads random randomSeed =
->     if random then RandomInterpretation.interpTriadList triads True (mkStdGen randomSeed)
->     else Interpretation.interpTriadList triads True
+> interpMusic :: [[Triad]] -> Bool -> Bool -> Int -> Music Pitch
+> interpMusic triads isMajor random randomSeed =
+>     if random then RandomInterpretation.interpTriadList triads isMajor (mkStdGen randomSeed)
+>     else Interpretation.interpTriadList triads isMajor
 
 > transposeMusic :: Music Pitch -> Int -> Int -> Music Pitch
 > transposeMusic music pitchClassIndex octave =
@@ -117,10 +126,11 @@
 >     devId <- selectOutput -< ()
 >     (cadences) <- title "Cadence Generation" $ cadencesPanel -< ()
 >     (cadenceTriads) <- title "Cadence Triad Generation" $ cadenceTriadsPanel -< cadences
->     (triads) <- title "Triad Generation" $ triadGenerationPanel -< cadenceTriads
+>     (isMajor) <- title "Major or Minor?" $ modesPanel -< ()
+>     (triads) <- title "Triad Generation" $ triadGenerationPanel -< (cadenceTriads, isMajor)
 >     (random, randomSeed) <- title "Randomness" $ leftRight $ randomnessPanel -< ()
 >     (pitchClassIndex, octave) <- title "Transposition" $ transpositionPanel -< ()
->     let music = interpMusic triads random randomSeed
+>     let music = interpMusic triads isMajor random randomSeed
 >         musicTransposed = transposeMusic music pitchClassIndex octave
 >     label "Filename: " -< ()
 >     filename <- textbox "" -< Nothing
