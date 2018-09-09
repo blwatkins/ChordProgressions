@@ -66,7 +66,7 @@
 >     label "Triad Seed: " -< ()
 >     triadGenSeedStr <- textbox "" -< Nothing
 >     let triadGenSeed = stringToInt triadGenSeedStr
->         triadList = genPhraseTriads cadenceTriads triadRules (mkStdGen triadGenSeed) numTriads
+>         triadList = genPhraseTriads cadenceTriads majorTriadRules (mkStdGen triadGenSeed) numTriads
 >         triads = map reverse triadList
 >     label "Triads: " -< ()
 >     display -< triads
@@ -99,8 +99,8 @@
 
 > interpMusic :: [[Triad]] -> Bool -> Int -> Music Pitch
 > interpMusic triads random randomSeed =
->     if random then RandomInterpretation.interpTriadList triads (mkStdGen randomSeed)
->     else Interpretation.interpTriadList triads
+>     if random then RandomInterpretation.interpTriadList triads True (mkStdGen randomSeed)
+>     else Interpretation.interpTriadList triads True
 
 > transposeMusic :: Music Pitch -> Int -> Int -> Music Pitch
 > transposeMusic music pitchClassIndex octave =

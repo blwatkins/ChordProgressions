@@ -9,8 +9,8 @@
 
 -- Triad Rules for Major Keys
 
-> triadRules :: [Rule (Triad, [Triad])]
-> triadRules = [
+> majorTriadRules :: [Rule (Triad, [Triad])]
+> majorTriadRules = [
 >     (0.90, (I,   [I, V])),
 >     (0.10, (I,   [I, VII])),
 >     (0.70, (II,  [II, VI])),
