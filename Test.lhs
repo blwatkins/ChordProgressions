@@ -10,6 +10,8 @@
 > import TriadRules
 > import Euterpea
 
+-- Cadence Generation
+
 > cadences :: [Cadence]
 > cadences = take 4 (infGenCadences cadenceProbs (mkStdGen 100))
 
@@ -40,6 +42,8 @@
 
 > minorMusic :: Music Pitch
 > minorMusic = Interpretation.interpTriadList minorTriads False
+
+-- Write MIDI File
 
 > writeMajor = writeMidi "major.mid" majorMusic
 > writeMinor = writeMidi "minor.mid" minorMusic
