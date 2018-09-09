@@ -7,8 +7,6 @@
 > import ChordTypes
 > import Rule
 
--- Triad Rules for Major Keys
-
 > majorTriadRules :: [Rule (Triad, [Triad])]
 > majorTriadRules = [
 >     (0.90, (I,   [I, V])),
